@@ -1,0 +1,28 @@
+{% extends 'examples/dashboard.html' %}
+{% block page_content %}
+<div class="row">
+    <form method="POST">
+        <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header ">
+            <h5 class="card-title">{{ object.etiqueta_tema }}</h5>
+            <p class="card-category">
+                {{ object.etiqueta_contenido }}
+            </p>
+            
+            </div>
+            <div class="card-body ">
+            <canvas id=chartHours width="400" height="100"></canvas>
+            </div>
+            <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <a href=" {{ object.etiqueta_fuente_url }} " target="_blank">Ver fuente</a>
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+
+{% endblock page_content %}

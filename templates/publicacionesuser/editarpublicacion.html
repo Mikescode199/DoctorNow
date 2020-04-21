@@ -1,0 +1,30 @@
+{% extends 'examples/dashboard.html' %}
+{% block page_content %}
+<div class="row">
+    <form method="POST">
+        <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header ">
+            <h5 class="card-title">Crear publicacion</h5>
+            <p class="card-category">
+                
+                    {% csrf_token %}
+                    {{ form }}
+            </p>
+            
+            </div>
+            <div class="card-body ">
+            <canvas id=chartHours width="400" height="100"></canvas>
+            </div>
+            <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <i class="fa fa-history"></i> <input type="submit" class="fadeIn fourth" value="Guardar">
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+
+{% endblock page_content %}

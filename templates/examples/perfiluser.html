@@ -1,2 +1,104 @@
 {% extends 'examples/dashboard.html' %}
+{% block page_content %}
+<div class="row">
+    <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-globe text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Capacity</p>
+                <p class="card-title">150GB<p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh"></i>
+            Update Now
+          </div>
+        </div>
+      </div>
+    </div> -->
+    
+  </div>
+  <div class="row">
+    {% for mis_datos in object_list %}
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Sobre mí </h5>
+          <p class="card-category">Nombre: {{ mis_datos.usuario_nombre }}</p>
+          <p class="card-category">Apellido Paterno: {{ mis_datos.usuario_apellido_paterno }}</p>
+          <p class="card-category">Apellido Materno: {{ mis_datos.usuario_apellido_materno }}</p>
+          <p class="card-category">Correo: {{ mis_datos.usuario_correo }}</p>
 
+        </div>
+        <div class="card-body ">
+          <canvas id=chartHours width="400" height="100"></canvas>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-history"></i> Updated 3 minutes ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Algo de publicidad para no morir de hambre</h5>
+          <p class="card-category">Programa hecho por</p>
+          <p class="card-category">MACC CODES</p>
+        </div>
+        <!-- <div class="card-body ">
+          <canvas id="chartEmail"></canvas>
+        </div>
+        <div class="card-footer ">
+          <div class="legend">
+            <i class="fa fa-circle text-primary"></i> Opened
+            <i class="fa fa-circle text-warning"></i> Read
+            <i class="fa fa-circle text-danger"></i> Deleted
+            <i class="fa fa-circle text-gray"></i> Unopened
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-calendar"></i> Number of emails sent
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-title"> Ocupacion </h5>
+          <p class="card-category"> {{ mis_datos.usuario_ocupacion }} </p>
+        </div>
+        <div class="card-body">
+          <canvas id="speedChart" width="400" height="100"></canvas>
+        </div>
+        <div class="card-footer">
+          <div class="chart-legend">
+            <i class="fa fa-circle text-info"></i> Tesla Model S
+            <i class="fa fa-circle text-warning"></i> BMW 5 Series
+          </div>
+          <hr />
+          <div class="card-stats">
+            <i class="fa fa-check"></i> Data information certified
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock page_content %}

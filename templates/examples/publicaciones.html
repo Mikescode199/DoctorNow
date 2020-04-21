@@ -6,9 +6,26 @@
             <div class="card-header ">
             <h5 class="card-title">Crear publicacion</h5>
             <p class="card-category">
-                {% for publicaciones in object_list %}
-                {{ publicaciones.etiqueta_tema }}
-                {% endfor %}
+                <table border="1" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tema  </th>
+                            <th>Acciones</th>
+                            
+            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for publicacion_user in object_list %}
+                        <tr>
+                            <td> {{ publicacion_user.etiqueta_tema}}  </td>
+                            <td><a href="{% url 'usuario:Ver_publicacion' publicacion_user.pk  %}" class="btn btn-outline-info">Ver</a></td>
+                            <td><a href="{% url 'usuario:Editar_publicacion' publicacion_user.pk  %}" class="btn btn-outline-success">Editar</a></td>
+                            <td><a href="{% url 'usuario:Eliminar_publicacion' publicacion_user.pk  %}" class="btn btn-outline-danger">Eliminar</a></td>
+                        </tr> 
+                    {% endfor %}
+                    </tbody>
+                </table>
                 
             
             </p>
@@ -18,11 +35,6 @@
             <canvas id=chartHours width="400" height="100"></canvas>
             </div>
             <div class="card-footer ">
-            <hr>
-            <div class="stats">
-                <i class="fa fa-history"></i> <input type="submit" class="fadeIn fourth" value="Publicar">
-            </div>
-            </div>
         </div>
         </div>
 </div>

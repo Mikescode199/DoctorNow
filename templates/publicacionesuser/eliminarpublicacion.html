@@ -1,0 +1,10 @@
+{% extends 'examples/dashboard.html' %}
+{% block page_content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-danger" >Eliminar {{ object.etiqueta_tema }}</button>
+    <a href="{% url 'usuario:Publicaciones' %}" class="btn btn-outline-success"> Volver </a>
+</form>
+
+{% endblock page_content %}

@@ -10,5 +10,8 @@ urlpatterns = [
     path('Publicaciones/', views.Publicaciones.as_view(), name="Publicaciones"),
     path('Perfil_user/', views.Perfil_user.as_view(), name="Perfil_user"),
     path('crear_publicaciones/', views.crear_publicaciones, name="Crear_publicaciones"),
+    path('Ver_publicacion/<int:pk>', views.Ver_publicacion.as_view(), name='Ver_publicacion'),
+    path('Eliminar_publicacion/<int:pk>', views.Eliminar_publicacion.as_view(), name='Eliminar_publicacion'),
+    path('Editar_publicacion/<int:pk>', views.Editar_publicacion.as_view(), name='Editar_publicacion'),
 
 ]

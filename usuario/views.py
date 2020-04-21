@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from publicacion.models import Publicacion
+from .models import Usuario
 from .forms import UsuarioForm, LoginForm, NewUser, NewPublicacion
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -68,8 +69,12 @@ class Publicaciones(generic.ListView):
 
 
 
-class Perfil_user(generic.View):
-    template_name = 'examples/Perfiluser.html'
+class Perfil_user(generic.ListView):
+    template_name = 'examples/perfiluser.html'
+    model = Usuario
+    def get_queryset(self, *args, **kwargs):
+        queryset = Usuario.objects.filter(user = self.request.user )
+        return queryset
     
 
 
@@ -94,12 +99,29 @@ def crear_publicaciones(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('usuario:menu')
+            return redirect('usuario:Publicaciones')
 
     else:
         form = NewPublicacion()
     
     return render(request, 'examples/crearpublicacion.html', {'form':form } )
 
+class Ver_publicacion(LoginRequiredMixin, generic.DetailView):
+    template_name = 'publicacionesuser/verpublicacion.html'
+    model = Publicacion
 
+
+
+class Eliminar_publicacion(LoginRequiredMixin, generic.DeleteView):
+    template_name = 'publicacionesuser/eliminarpublicacion.html'
+    model = Publicacion
+    success_url = reverse_lazy('usuario:Publicaciones')
+
+
+
+class Editar_publicacion(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'publicacionesuser/editarpublicacion.html'
+    model = Publicacion
+    form_class = NewPublicacion
+    success_url = reverse_lazy('usuario:Publicaciones')
     
