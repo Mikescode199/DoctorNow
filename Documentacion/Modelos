@@ -1,0 +1,15 @@
+Aqui todos los modelos que el programa contiene:
+
+Publicacion:
+etiqueta_tema
+etiqueta_contenido 
+etiqueta_fuente_url (opcional)
+etiqueta_usuario (Publicado por)
+
+Usuario:
+usuario_username
+usuario_nombre
+usuario_apellido_paterno
+usuario_apellido_materno
+usuario_ocupacion (Editable)
+usuario_correo
