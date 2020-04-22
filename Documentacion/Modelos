@@ -13,3 +13,8 @@ usuario_apellido_paterno
 usuario_apellido_materno
 usuario_ocupacion (Editable)
 usuario_correo
+
+Quejas o sugerencias:
+
+sugerencias_user
+sugerencias_sugerencias_quejas

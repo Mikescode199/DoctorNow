@@ -5,10 +5,14 @@ from .models import Usuario
 from .forms import UsuarioForm, LoginForm, NewUser, NewPublicacion
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
+@login_required(login_url='') #Con este codigo limitamos a los usuarios que no tienen un perfil
 def menu(request):
     context ={
         
@@ -47,7 +51,7 @@ def registro_user(request):
     return render(request, 'login.html', context)
 
 
-class CrearUsuario( generic.FormView):
+class CrearUsuario(generic.FormView):
     template_name = 'singout.html'
     form_class = NewUser
     success_url = reverse_lazy('usuario:datos_usuario')
@@ -58,7 +62,7 @@ class CrearUsuario( generic.FormView):
 
 
 
-class Publicaciones(generic.ListView):
+class Publicaciones(LoginRequiredMixin, generic.ListView):
     template_name = 'examples/publicaciones.html'
     model = Publicacion
 
@@ -69,7 +73,7 @@ class Publicaciones(generic.ListView):
 
 
 
-class Perfil_user(generic.ListView):
+class Perfil_user(LoginRequiredMixin,generic.ListView):
     template_name = 'examples/perfiluser.html'
     model = Usuario
     def get_queryset(self, *args, **kwargs):
@@ -77,7 +81,7 @@ class Perfil_user(generic.ListView):
         return queryset
     
 
-
+@login_required(login_url='')
 def datos_usuario(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
@@ -91,6 +95,7 @@ def datos_usuario(request):
             form = UsuarioForm()
         
     return render(request, 'datos_usuario.html', {'form':form } )
+
 
 def crear_publicaciones(request):
     if request.method == 'POST':
@@ -125,3 +130,10 @@ class Editar_publicacion(LoginRequiredMixin, generic.UpdateView):
     form_class = NewPublicacion
     success_url = reverse_lazy('usuario:Publicaciones')
     
+
+def logout_usuario(request):
+    logout(request)
+    context ={
+            
+    }
+    return render(request, 'logout.html', context)

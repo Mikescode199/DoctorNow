@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Publicacion(models.Model):
     etiqueta_tema = models.CharField(max_length=50)
     etiqueta_contenido = models.TextField()
-    etiqueta_fuente_url = models.URLField()
+    etiqueta_fuente_url = models.URLField(blank=True, default='Opcional')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return '{}'.format(self.user)
