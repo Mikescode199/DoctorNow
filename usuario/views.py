@@ -8,12 +8,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-
+import datetime
+from django.http import HttpResponse
+from django.utils import asyncio
 # Create your views here.
 
 
 @login_required(login_url='') #Con este codigo limitamos a los usuarios que no tienen un perfil
-def menu(request):
+async def menu(request):
     context ={
         
     }
@@ -27,14 +29,12 @@ def registro_user(request):
         if form.is_valid():
             user = request.POST['username']
             password = request.POST['password']
-            print(user, password)
             user = authenticate(username= user, password = password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     return redirect('usuario:menu')
                     message = 'En curso...'
-                   
                 else:
                     message = 'Usuario no activo'
             else:
