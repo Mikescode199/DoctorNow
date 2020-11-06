@@ -11,15 +11,10 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponse
 from django.utils import asyncio
+from asgiref.sync import sync_to_async
 # Create your views here.
 
 
-@login_required(login_url='') #Con este codigo limitamos a los usuarios que no tienen un perfil
-async def menu(request):
-    context ={
-        
-    }
-    return render(request, 'examples/dashboard.html', context)
 
 def registro_user(request):
     message = 'NOt LOgin'
@@ -69,6 +64,7 @@ class Publicaciones(LoginRequiredMixin, generic.ListView):
     def get_queryset(self, *args, **kwargs):
         queryset = Publicacion.objects.filter(user = self.request.user )
         return queryset
+
 
 
 
